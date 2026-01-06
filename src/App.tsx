@@ -1,11 +1,20 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import AuthorizedLayout from "./components/layout/authorizedLayout"
+import LoginPage from "./components/login/loginPage"
+import DashboardPage from "./components/dashboard/dashboardPage"
+import NotFoundPage from "./components/layout/notFoundPage"
 
-import { Button } from 'antd'
 function App() {
 
   return (
-        <div>
-          <Button type='primary'>click me</Button>
-        </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<AuthorizedLayout />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
