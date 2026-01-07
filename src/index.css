@@ -1,3 +1,9 @@
+* {
+  font-family: 'Vazirmatn', sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
 .login-gradient {
-  background: linear-gradient(-45deg, #3D5A80 0%, #4A6FA5 45%, #9F8F9F 100%);
+  background: linear-gradient(-45deg, #3d5a80 0%, #4a6fa5 45%, #9f8f9f 100%);
 }
