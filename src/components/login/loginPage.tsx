@@ -1,5 +1,9 @@
 import { PhoneOutlined } from '@ant-design/icons'
 import { Button, Card, Form, Input, Layout, Typography } from 'antd'
+import {
+  normalizePhoneNumber,
+  isValidPhoneNumber,
+} from '../../utils/validators'
 
 const { Title } = Typography
 
@@ -66,8 +70,26 @@ export default function LoginPage() {
           </Title>
 
           <Form.Item
-            rules={[{ required: true, message: 'این فیلد الزامی است' }]}
+            rules={[
+              {
+                required: true,
+                message: 'این فیلد الزامی است',
+              },
+              {
+                validator: (_, value) => {
+                  if (!value) {
+                    return Promise.resolve()
+                  }
+
+                  return isValidPhoneNumber(value)
+                    ? Promise.resolve()
+                    : Promise.reject(new Error('شماره وارد شده نامعتبر است'))
+                },
+              },
+            ]}
             name="Input"
+            normalize={normalizePhoneNumber}
+            validateTrigger="onSubmit"
           >
             <Input
               dir="rtl"
@@ -79,6 +101,8 @@ export default function LoginPage() {
               }}
               size="large"
               placeholder="شماره تلفن همراه"
+              inputMode="numeric"
+              maxLength={13}
               suffix={
                 <PhoneOutlined
                   style={{
@@ -108,7 +132,10 @@ export default function LoginPage() {
               width: '400px',
               height: '56px',
               borderRadius: '8px',
+              marginBottom: '30px',
             }}
+            type="primary"
+            htmlType="submit"
           >
             دریافت کد
           </Button>
